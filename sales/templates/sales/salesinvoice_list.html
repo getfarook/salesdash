@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block body_block %}
+  <h4>Sales Invoice List</h4>
+  <br>
+  {% if user.is_authenticated %}
+    <div class="table-responsive-md">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Inv No</th>
+            <th scope="col">Date</th>
+            <th scope="col">Doc No</th>
+            <th scope="col">Customer</th>
+            <th scope="col">Amount</th>
+            <th scope="col">View</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for salesinvoice in object_list %}
+            <tr>
+                <th scope="row">#</th>
+                <td>{{salesinvoice.doc_type}}</td>
+                <td>{{salesinvoice.date}}</td>
+                <td>{{salesinvoice.doc_no}}</td>
+                <td>{{salesinvoice.customer}}</td>
+                <td>{{salesinvoice.total}}</td>
+                <td><a href="{% url 'sales:single' pk=salesinvoice.pk %}">Click</a></td>
+
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endif %}
+{% endblock %}

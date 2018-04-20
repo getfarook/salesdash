@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+
+{% block javascript %}
+  <script>
+    $("#idiscount").change(function () {
+      console.log( $(this).val() );
+      $("#gtotal").val($("#itotal").val()-$("#idiscount").val());
+    });
+
+    $("#icustomer").change(function () {
+      console.log( $(this).val() );
+      var customer = $(this).val();
+
+      $.ajax({
+        url: '{% url "sales:get_cust_area" %}',
+        data: {
+          'customer': customer
+        },
+        dataType: 'json',
+        success: function (data) {
+          $("#idocno").val(data.area)
+        }
+      });
+    });
+
+  </script>
+{% endblock %}
+
+
+{% block body_block %}
+<h4>Sales Invoice</h4>
+  {# <form method="POST" action="{% url 'sales:create' %}" id="groupForm"> #}
+
+<div class="myform">
+ <form method="POST" action="" id="groupForm">
+  	{% csrf_token %}
+  	{# {% bootstrap_form form %} #}
+    {# {{form.as_p}} #}
+  <div class="container">
+    <br>
+
+
+    <div class="row">
+      <div class="col-sm">
+        {{form.doc_type}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+          <label for="icustomer">Customer:</label>
+          {{form.customer}}
+      </div>
+      <div class="col-sm">
+          <label for="idocno">Doc No</label>
+          {{form.doc_no}}
+      </div>
+      <div class="col-sm">
+          <label for="idate">Date:</label>
+          {{form.date}}
+      </div>
+    </div>
+    <br>
+        <!-- Invoice Lines Start -->
+                  <div class="row">
+                    <div class="col-md">
+                      <div class="table-responsive-lg">
+                      <table class="table">
+                        <thead class="thead-light">
+                          <tr>
+                            <th scope="col">Product</th>
+                            <th scope="col">Unit Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Sub_Total</th>
+                            <th scope="col">Delete</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {{ invoiceline_formset.management_form }}
+                          {% for formlin in invoiceline_formset %}
+                            <tr>
+                              <td>{{ formlin.product }}</td>
+                              <td>{{ formlin.unit_price }}</td>
+                              <td>{{ formlin.quantity }}</td>
+                              <td>{{ formlin.sub_total }}</td>
+                              <td>{{ formlin.DELETE }}{{ formlin.salesinvoice }}{{ formlin.id }}</td>
+                            </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                      </div>
+                    </div>
+                </div>
+        <!-- Invoice Lines Ends -->
+        <hr>
+        <div class="row">
+          <div class="col-sm">
+              <label for="itotal">Total:</label>
+              {{form.total}}
+          </div>
+          <div class="col-sm">
+              <label for="idiscount">Discount</label>
+              {{form.total_discount}}
+          </div>
+          <div class="col-sm">
+              <label for="gtotal">Grand Total:</label>
+              {{form.debit}}
+          </div>
+        </div>
+
+    <div class="row">
+      <div class="col-sm">
+          <label for="idetails">Details:</label>
+          {{form.details}}
+      </div>
+    </div>
+
+          <br>
+          <input type="submit" value="Save" class="btn btn-primary btn-large">
+          <br>
+  </div>
+</form>
+
+</div>
+{% endblock %}

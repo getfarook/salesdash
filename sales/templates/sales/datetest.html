@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block body_block %}
+  <h1>hello word</h1>
+  <form method="get" role="form">
+    {% csrf_token %}
+
+    <div class="container">
+      <br>
+      <div class="row">
+        <div class="col-sm">
+            <label for="icustomer">Customer:</label>
+            {{form.todo}}
+        </div>
+        <div class="col-sm">
+            <label for="idocno">Date</label>
+            {{form.date}}
+        </div>
+      </div>
+    </div>
+    <br>
+
+    <div class="form-group">
+      <input type="submit" value="Submit" class="btn btn-primary" />
+    </div>
+  </form>
+{% endblock %}

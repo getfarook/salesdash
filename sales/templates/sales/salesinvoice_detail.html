@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block body_block %}
+  <br>
+  <div class="myform">
+
+      <div class="container">
+        <h5>Sales Invoice: {{salesinvoice.pk}} </h5>
+      <div class="row">
+        <div class="col">
+          <strong>Doc No:</strong>{{salesinvoice.pk}}
+        </div>
+        <div class="col">
+          <strong>Date:</strong> {{salesinvoice.date}}
+        </div>
+        <div class="col">
+          <strong>Inv No:</strong> {{salesinvoice.doc_no}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+
+          <strong>Customer:</strong> {{salesinvoice.customer}}
+        </div>
+        <div class="col">
+          <strong>Total Value:</strong> {{salesinvoice.total}}
+        </div>
+        <div class="col">
+          #
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <strong>Details:</strong> {{salesinvoice.details}}
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col">
+        {% if salesinvoice.invoicelines.count == 0 %}
+          <h5>No Invoice Lines</h5>
+        {% else %}
+        <table class="table">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">Product</th>
+              <th scope="col">Unit Price</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Sub_Total</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for invoiceline in salesinvoice.invoicelines.all %}
+            <tr>
+              <td>{{ invoiceline.product }}</td>
+              <td>{{ invoiceline.unit_price }}</td>
+              <td>{{ invoiceline.quantity }}</td>
+              <td>{{ invoiceline.sub_total }}</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+        {% endif %}
+        </div>
+      </div>
+
+
+
+    </div>
+</div>
+
+<br>
+<a href="{% url 'sales:updateinvoice' pk=salesinvoice.pk %}"
+    class = 'btn btn-sm btn-fill btn-warning'>
+    <span class='far fa-edit'></span></a>
+
+<a href="{% url 'sales:deleteinvoice' pk=salesinvoice.pk %}"
+    class = 'btn btn-sm btn-fill btn-danger'>
+    <span class='fas fa-trash-alt'></span></a>
+{% endblock %}

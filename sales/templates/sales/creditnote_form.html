@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block body_block %}
+<h4>Credit Note</h4>
+  {# <form method="POST" action="{% url 'sales:create' %}" id="groupForm"> #}
+
+<div class="myform">
+ <form method="POST" action="" id="groupForm">
+  	{% csrf_token %}
+  	{# {% bootstrap_form form %} #}
+    {# {{form.as_p}} #}
+  <div class="container">
+    <br>
+    <div class="row">
+      <div class="col-sm">
+        {{form.doc_type}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+          <label for="icustomer">Customer:</label>
+          {{form.customer}}
+      </div>
+      <div class="col-sm">
+          <label for="idocno">Doc No</label>
+          {{form.doc_no}}
+      </div>
+      <div class="col-sm">
+          <label for="idate">Date:</label>
+          {{form.date}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <label for="amount">Amount:</label>
+          {{form.credit}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+          <label for="idetails">Details:</label>
+          {{form.details}}
+      </div>
+    </div>
+    <br>
+      <input type="submit" value="Save" class="btn btn-primary btn-large">
+    <br>
+  </div>
+</form>
+
+</div>
+{% endblock %}
