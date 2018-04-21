@@ -12,7 +12,7 @@ from django.views import generic,View
 from sales.models import SalesInvoice, SalesInvoiceLine
 from sales.models import Partner
 from . import models
-from sales.forms import InvoiceForm, InvoiceFormSet,DateTestForm, CreditNoteForm
+from sales.forms import InvoiceForm, InvoiceFormSet,DateTestForm, CreditNoteForm, DebitNoteForm
 from django.http import JsonResponse
 from django.core import serializers
 
@@ -26,7 +26,7 @@ class DateTestView(generic.TemplateView):
     form_class = DateTestForm
     template_name = 'sales/datetest.html'
 
-
+################ INVOICE VIEWS BEGINS#############
 
 class CreateInvoice(LoginRequiredMixin, generic.CreateView):
 
@@ -103,8 +103,10 @@ class DeleteInvoice(LoginRequiredMixin, generic.DeleteView):
     model = SalesInvoice
     success_url = reverse_lazy('sales:invoicelist')
 
+################ INVOICE VIEWS ENDS#############
 
-################ CREDITNOTE VIEWS #############
+
+################ CREDITNOTE VIEWS BEGINS#############
 
 
 class CreateCreditNote(LoginRequiredMixin, generic.CreateView):
@@ -130,9 +132,42 @@ class CreditNoteDetail(LoginRequiredMixin, generic.DetailView):
 
 class DeleteCreditNote(LoginRequiredMixin, generic.DeleteView):
     model = SalesInvoice
-    success_url = reverse_lazy('sales:invoicelist')
+    success_url = reverse_lazy('sales:creditnotelist')
     template_name = 'sales/creditnote_confirm_delete.html'
 
 ################### END OF CREDITNOTE VIEWS ######
+
+
+
+################ DEBITNOTE VIEWS BEGINS#############
+class CreateDebitNote(LoginRequiredMixin, generic.CreateView):
+
+    form_class = DebitNoteForm
+    model = SalesInvoice
+    success_url=reverse_lazy('sales:debitnotelist')
+    template_name = 'sales/debitnote_form.html'
+
+class UpdateDebitNote(LoginRequiredMixin, generic.UpdateView):
+    form_class = DebitNoteForm
+    model = SalesInvoice
+    success_url=reverse_lazy('sales:debitnotelist')
+    template_name = 'sales/debitnote_form.html'
+
+class ListDebitNote(LoginRequiredMixin, generic.ListView):
+    model = SalesInvoice
+    template_name = 'sales/debitnote_list.html'
+
+class DebitNoteDetail(LoginRequiredMixin, generic.DetailView):
+    model = SalesInvoice
+    template_name = 'sales/debitnote_detail.html'
+
+class DeleteDebitNote(LoginRequiredMixin, generic.DeleteView):
+    model = SalesInvoice
+    success_url = reverse_lazy('sales:debitnotelist')
+    template_name = 'sales/debitnote_confirm_delete.html'
+
+################### END OF DEBITNOTE VIEWS ######
+
+
     # def get_absolute_url(self):
     #     return reverse("sales:single",kwargs={"pk": self.pk})

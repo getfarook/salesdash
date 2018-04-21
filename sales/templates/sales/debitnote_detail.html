@@ -5,7 +5,7 @@
   <br>
   <div class="myform">
       <div class="container">
-        <h5>Credit Note: {{salesinvoice.pk}} </h5>
+        <h5>Debit Note: {{salesinvoice.pk}} </h5>
       <div class="row">
         <div class="col">
           <strong>Date:</strong> {{salesinvoice.date}}
@@ -20,7 +20,7 @@
           <strong>Customer:</strong> {{salesinvoice.customer}}
         </div>
         <div class="col">
-          <strong>Total Value:</strong> {{salesinvoice.credit}}
+          <strong>Total Value:</strong> {{salesinvoice.debit}}
         </div>
         <div class="col">
           #
@@ -36,11 +36,11 @@
 </div>
 
 <br>
-<a href="{% url 'sales:updatecreditnote' pk=salesinvoice.pk %}"
+<a href="{% url 'sales:updatedebitnote' pk=salesinvoice.pk %}"
     class = 'btn btn-sm btn-fill btn-warning'>
     <span class='far fa-edit'></span></a>
 
-<a href="{% url 'sales:deletecreditnote' pk=salesinvoice.pk %}"
+<a href="{% url 'sales:deletedebitnote' pk=salesinvoice.pk %}"
     class = 'btn btn-sm btn-fill btn-danger'>
     <span class='fas fa-trash-alt'></span></a>
 {% endblock %}

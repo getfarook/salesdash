@@ -2,7 +2,7 @@
 {% load bootstrap3 %}
 
 {% block body_block %}
-  <h4>Credit Note List</h4>
+  <h4>Debit Note List</h4>
   <br>
   {% if user.is_authenticated %}
       <table class="table table-striped">
@@ -13,21 +13,21 @@
             <th scope="col">Date</th>
             <th scope="col">Doc No</th>
             <th scope="col">Customer</th>
-            <th scope="col">Credit</th>
+            <th scope="col">Debit</th>
             <th scope="col">View</th>
           </tr>
         </thead>
         <tbody>
           {% for salesinvoice in object_list %}
-            {% if salesinvoice.doc_type == "CN" %}
+            {% if salesinvoice.doc_type == "DN" %}
             <tr>
                 <th scope="row">#</th>
                 <td>{{salesinvoice.doc_type}}</td>
                 <td>{{salesinvoice.date}}</td>
                 <td>{{salesinvoice.doc_no}}</td>
                 <td>{{salesinvoice.customer}}</td>
-                <td>{{salesinvoice.credit}}</td>
-                <td><a href="{% url 'sales:cndetail' pk=salesinvoice.pk %}">Click</a></td>
+                <td>{{salesinvoice.debit}}</td>
+                <td><a href="{% url 'sales:dndetail' pk=salesinvoice.pk %}">Click</a></td>
 
             </tr>
             {% endif %}

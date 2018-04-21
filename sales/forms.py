@@ -33,6 +33,21 @@ class InvoiceForm(forms.ModelForm):
             'debit':forms.NumberInput(attrs={'class':'form-control','placeholder':'Grand Total','id':'gtotal'}),
         }
 
+class DebitNoteForm(forms.ModelForm):
+    class Meta():
+        model = SalesInvoice
+        fields = ("doc_type", "date",'doc_no','customer','details','debit')
+
+        widgets = {
+            'doc_type':forms.Select(attrs={'id':'idoctype'}),
+            'date':forms.DateInput(attrs={'class':'form-control','placeholder':'Enter Date','id':'idate'}),
+            'doc_no':forms.TextInput(attrs={'class':'form-control','placeholder':'Tally Inv No.','id':'idocno'}),
+            'customer':forms.Select(attrs={'class':'form-control','placeholder':'Select Customer','id':'icustomer'}),
+            'details':forms.Textarea(attrs={'class':'editable medium-editor-textarea form-control','placeholder':'All misc details about bill','rows':'2','id':'idetails'}),
+            'debit':forms.NumberInput(attrs={'class':'form-control','placeholder':'Grand Total','id':'amount'}),
+        }
+
+
 class CreditNoteForm(forms.ModelForm):
     class Meta():
         model = SalesInvoice
@@ -46,8 +61,6 @@ class CreditNoteForm(forms.ModelForm):
             'details':forms.Textarea(attrs={'class':'editable medium-editor-textarea form-control','placeholder':'All misc details about bill','rows':'2','id':'idetails'}),
             'credit':forms.NumberInput(attrs={'class':'form-control','placeholder':'Grand Total','id':'amount'}),
         }
-
-
 
 
 InvoiceFormSet = inlineformset_factory(SalesInvoice, SalesInvoiceLine, fields=('__all__'))

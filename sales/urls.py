@@ -14,6 +14,7 @@ urlpatterns = [
     path('list/', views.ListInvoice.as_view(),name='invoicelist'),
     url('update/(?P<pk>\d+)/$', views.UpdateInvoice.as_view(),name='updateinvoice'),
     url('delete/(?P<pk>\d+)/$', views.DeleteInvoice.as_view(),name='deleteinvoice'),
+    # End of Sales Invoice
 
     #Receipt
 
@@ -23,8 +24,15 @@ urlpatterns = [
     path('cnlist/', views.ListCreditNote.as_view(),name='creditnotelist'),
     url('updatecn/(?P<pk>\d+)/$', views.UpdateCreditNote.as_view(),name='updatecreditnote'),
     url('deletecn/(?P<pk>\d+)/$', views.DeleteCreditNote.as_view(),name='deletecreditnote'),
-    #Debit Note
+    # End of Credit Note
 
+    #Debit Note
+    url(r"^newdn/$", views.CreateDebitNote.as_view(), name="createdn"),
+    url(r"^dn/(?P<pk>\d+)/$", views.DebitNoteDetail.as_view(), name="dndetail"),
+    path('dnlist/', views.ListDebitNote.as_view(),name='debitnotelist'),
+    url('updatedn/(?P<pk>\d+)/$', views.UpdateDebitNote.as_view(),name='updatedebitnote'),
+    url('deletedn/(?P<pk>\d+)/$', views.DeleteDebitNote.as_view(),name='deletedebitnote'),
+    # End of Debit Note
 
     #Test-to-be-deleted
     url(r"^datetest/$", views.DateTestView.as_view(), name="datetest"),
