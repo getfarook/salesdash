@@ -17,9 +17,7 @@ from django.http import JsonResponse
 from django.core import serializers
 
 # Create your views here.
-# test comment
-#test comment 2
-#test comment 3
+
 
 class JsTestView(generic.TemplateView):
     template_name = 'sales/jstest.html'
