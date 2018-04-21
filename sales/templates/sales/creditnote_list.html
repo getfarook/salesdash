@@ -2,7 +2,7 @@
 {% load bootstrap3 %}
 
 {% block body_block %}
-  <h4>Sales Invoice List</h4>
+  <h4>Credit Note List</h4>
   <br>
   {% if user.is_authenticated %}
       <table class="table table-striped">
@@ -19,6 +19,7 @@
         </thead>
         <tbody>
           {% for salesinvoice in object_list %}
+            {% if salesinvoice.doc_type == "CN" %}
             <tr>
                 <th scope="row">#</th>
                 <td>{{salesinvoice.doc_type}}</td>
@@ -29,6 +30,7 @@
                 <td><a href="{% url 'sales:cndetail' pk=salesinvoice.pk %}">Click</a></td>
 
             </tr>
+            {% endif %}
           {% endfor %}
         </tbody>
       </table>

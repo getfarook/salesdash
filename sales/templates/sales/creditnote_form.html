@@ -1,5 +1,17 @@
 {% extends "base.html" %}
 
+{% block javascript %}
+  <script>
+    jQuery(document).ready(function($){
+      $('#idoctype').find("option[value='CN']").attr('selected','selected');
+      $('#idoctype').prop('hidden', true);
+    });
+  </script>
+{% endblock %}
+
+
+
+
 {% block body_block %}
 <h4>Credit Note</h4>
   {# <form method="POST" action="{% url 'sales:create' %}" id="groupForm"> #}

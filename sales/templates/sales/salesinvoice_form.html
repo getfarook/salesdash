@@ -3,6 +3,11 @@
 
 {% block javascript %}
   <script>
+    jQuery(document).ready(function($){
+      $('#idoctype').find("option[value='SI']").attr('selected','selected');
+      $('#idoctype').prop('hidden', true);
+    });
+
     $("#idiscount").change(function () {
       console.log( $(this).val() );
       $("#gtotal").val($("#itotal").val()-$("#idiscount").val());

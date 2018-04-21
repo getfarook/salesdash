@@ -20,6 +20,7 @@
         </thead>
         <tbody>
           {% for salesinvoice in object_list %}
+            {% if salesinvoice.doc_type == "SI" %}
             <tr>
                 <th scope="row">#</th>
                 <td>{{salesinvoice.doc_type}}</td>
@@ -30,6 +31,7 @@
                 <td><a href="{% url 'sales:single' pk=salesinvoice.pk %}">Click</a></td>
 
             </tr>
+            {% endif %}
           {% endfor %}
         </tbody>
       </table>

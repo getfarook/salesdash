@@ -36,11 +36,11 @@
 </div>
 
 <br>
-<a href="{% url 'sales:updateinvoice' pk=salesinvoice.pk %}"
+<a href="{% url 'sales:updatecreditnote' pk=salesinvoice.pk %}"
     class = 'btn btn-sm btn-fill btn-warning'>
     <span class='far fa-edit'></span></a>
 
-<a href="{% url 'sales:deleteinvoice' pk=salesinvoice.pk %}"
+<a href="{% url 'sales:deletecreditnote' pk=salesinvoice.pk %}"
     class = 'btn btn-sm btn-fill btn-danger'>
     <span class='fas fa-trash-alt'></span></a>
 {% endblock %}

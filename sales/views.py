@@ -111,7 +111,13 @@ class CreateCreditNote(LoginRequiredMixin, generic.CreateView):
 
     form_class = CreditNoteForm
     model = SalesInvoice
-    success_url=reverse_lazy('sales:invoicelist')
+    success_url=reverse_lazy('sales:creditnotelist')
+    template_name = 'sales/creditnote_form.html'
+
+class UpdateCreditNote(LoginRequiredMixin, generic.UpdateView):
+    form_class = CreditNoteForm
+    model = SalesInvoice
+    success_url=reverse_lazy('sales:creditnotelist')
     template_name = 'sales/creditnote_form.html'
 
 class ListCreditNote(LoginRequiredMixin, generic.ListView):
@@ -121,6 +127,11 @@ class ListCreditNote(LoginRequiredMixin, generic.ListView):
 class CreditNoteDetail(LoginRequiredMixin, generic.DetailView):
     model = SalesInvoice
     template_name = 'sales/creditnote_detail.html'
+
+class DeleteCreditNote(LoginRequiredMixin, generic.DeleteView):
+    model = SalesInvoice
+    success_url = reverse_lazy('sales:invoicelist')
+    template_name = 'sales/creditnote_confirm_delete.html'
 
 ################### END OF CREDITNOTE VIEWS ######
     # def get_absolute_url(self):
