@@ -34,6 +34,14 @@ urlpatterns = [
     url('deletedn/(?P<pk>\d+)/$', views.DeleteDebitNote.as_view(),name='deletedebitnote'),
     # End of Debit Note
 
+    #Receipt
+    url(r"^newrc/$", views.CreateReceipt.as_view(), name="createrc"),
+    url(r"^rc/(?P<pk>\d+)/$", views.ReceiptDetail.as_view(), name="rcdetail"),
+    path('rclist/', views.ListReceipt.as_view(),name='receiptlist'),
+    url('updaterc/(?P<pk>\d+)/$', views.UpdateReceipt.as_view(),name='updatereceipt'),
+    url('deleterc/(?P<pk>\d+)/$', views.DeleteReceipt.as_view(),name='deletereceipt'),
+    # End of Receipt
+
     #Test-to-be-deleted
     url(r"^datetest/$", views.DateTestView.as_view(), name="datetest"),
     url(r"^jstest/$", views.JsTestView.as_view(), name="jstest"),

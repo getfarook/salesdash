@@ -12,7 +12,8 @@ from django.views import generic,View
 from sales.models import SalesInvoice, SalesInvoiceLine
 from sales.models import Partner
 from . import models
-from sales.forms import InvoiceForm, InvoiceFormSet,DateTestForm, CreditNoteForm, DebitNoteForm
+from sales.forms import ( InvoiceForm, InvoiceFormSet, DateTestForm,
+                            CreditNoteForm, DebitNoteForm, ReceiptForm )
 from django.http import JsonResponse
 from django.core import serializers
 
@@ -168,6 +169,36 @@ class DeleteDebitNote(LoginRequiredMixin, generic.DeleteView):
 
 ################### END OF DEBITNOTE VIEWS ######
 
+################ RECEIPT VIEWS BEGINS#############
+
+
+class CreateReceipt(LoginRequiredMixin, generic.CreateView):
+
+    form_class = ReceiptForm
+    model = SalesInvoice
+    success_url=reverse_lazy('sales:receiptlist')
+    template_name = 'sales/receipt_form.html'
+
+class UpdateReceipt(LoginRequiredMixin, generic.UpdateView):
+    form_class = ReceiptForm
+    model = SalesInvoice
+    success_url=reverse_lazy('sales:receiptlist')
+    template_name = 'sales/receipt_form.html'
+
+class ListReceipt(LoginRequiredMixin, generic.ListView):
+    model = SalesInvoice
+    template_name = 'sales/receipt_list.html'
+
+class ReceiptDetail(LoginRequiredMixin, generic.DetailView):
+    model = SalesInvoice
+    template_name = 'sales/receipt_detail.html'
+
+class DeleteReceipt(LoginRequiredMixin, generic.DeleteView):
+    model = SalesInvoice
+    success_url = reverse_lazy('sales:receiptlist')
+    template_name = 'sales/receipt_confirm_delete.html'
+
+################### END OF RECEIPT VIEWS ######
 
     # def get_absolute_url(self):
     #     return reverse("sales:single",kwargs={"pk": self.pk})
